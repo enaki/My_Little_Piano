@@ -128,9 +128,9 @@
 
         function change_octave(){
           $.ajax({
-            url: '/set_octave',
-            type: 'POST',
-            data: {octave: octave},
+              url: '/set_octave',
+              type: 'POST',
+              data: {'octave': octave},
           });
         }
 

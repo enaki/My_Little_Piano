@@ -18,8 +18,9 @@
  """
 
 # import the libraries used
-from flask import request, Flask, render_template, redirect, url_for
-from bottle import route, run, template, request
+import sys
+
+from flask import request, Flask, render_template, redirect, url_for, jsonify
 import pigpio
 import numpy as np
 
@@ -276,16 +277,15 @@ def off():
 @app.route('/set_octave', methods=['POST'])
 def set_octave():
     global octave
-    octave = int(request.args.get('octave'))
-    print(octave)
+    octave = int(request.form['octave'])
     # send a message to the user
     return 'ok'
 
 
-@app.route('/refresh')
+@app.route('/refresh', methods=['GET'])
 def refresh():
     # send the value to the client
-    return {'octave': octave}
+    return jsonify({'octave': octave})
 
 
 try:
