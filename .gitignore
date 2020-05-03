@@ -4,3 +4,4 @@ venv
 dimRGBLed.py
 song.py
 test.py
+__pycache__
