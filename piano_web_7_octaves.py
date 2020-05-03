@@ -1,10 +1,4 @@
 """
- * Credits: www.plusivo.com
- *
- * Lesson 26: Piano
- *
- * The code below is created for the lesson "Piano"
- * where you will learn how to create a piano style, with one octave.
  * In HTML and using JavaScript we will call special functions that
  * will play a specific note on the buzzer when any key of the piano
  * is pressed.
@@ -16,44 +10,81 @@
  *
  * More information about the code can be found in the guide.
  """
-
-# import the libraries used
-import sys
+import threading
 
 import numpy as np
+
+from samples.sweet_dreams import SweetDreams
+from samples.smells_like_teen_spirit import SmellsLikeTennSpirit
 from web_services import web_services as web
+from raspberrypi_configurations import raspberrypi_configurations as rasp
 
 
-# loads the octaves of the piano into the octave_array variable
-def load_piano_octaves():
+# get the json piano octaves
+def get_piano_octaves_json():
     import json
     try:
         with open("resources/piano_octaves.json") as json_file:
             data = json.load(json_file)
-            web.octave_array = np.array([np.array([list(note.values())[0] for note in octave]) for octave in data.values()])
+            return data
+
     except FileNotFoundError:
-        return
+        print("File not Found")
+
+
+# loads the octaves of the piano into the octave_array variable
+def load_piano_octaves():
+    data = get_piano_octaves_json()
+    web.octave_array = np.array([np.array(list(octave.values())) for octave in data.values()])
+
+
+def local_input_piano_samples():
+    data = get_piano_octaves_json()
+    sweet_dreams = SweetDreams(data['octave_4'], data['octave_5'], 3)
+    smells_like_teen_spirits = SmellsLikeTennSpirit(data['octave_4'], data['octave_5'], data['octave_6'], 1.2)
+    print("ready")
+    while True:
+        # if the first button was pressed, play the first song
+        if rasp.GPIO.input(rasp.button1) == rasp.GPIO.LOW and rasp.is_buzzer_off:
+            rasp.is_buzzer_off = False
+            rasp.is_buzzer_used_locally = True
+            sweet_dreams.play()
+            rasp.is_buzzer_off = True
+            rasp.is_buzzer_used_locally = False
+
+        # if the second button was pressed, play the second song
+        if rasp.GPIO.input(rasp.button2) == rasp.GPIO.LOW and rasp.is_buzzer_off:
+            rasp.is_buzzer_off = False
+            rasp.is_buzzer_used_locally = True
+            smells_like_teen_spirits.play()
+            rasp.is_buzzer_off = True
+            rasp.is_buzzer_used_locally = False
 
 
 def main():
-
     web.octave_array = None
     load_piano_octaves()
     if web.octave_array is None:
         return
 
-
     try:
         # we will run the app on port 5000
         # run(host='0.0.0.0', port='5000')
-        web.app.debug = True
+        threading.Thread(target=local_input_piano_samples).start()
+        web.app.debug = False
+        web.app.use_reloader = False
         web.app.run(host='0.0.0.0', port=5000)
 
     except KeyboardInterrupt:
         pass
-
-    # stop the pwm signal
-    web.pi.hardware_PWM(web.buzzer, 0, 0)
+    finally:
+        # stop the pwm signal
+        rasp.pi.hardware_PWM(web.buzzer, 0, 0)
+        rasp.rgb_led_configure()
+        print("clean up")
+        rasp.GPIO.cleanup()
+        # stop the connection with the daemon
+        rasp.pi.stop()
 
 
 if __name__ == '__main__':

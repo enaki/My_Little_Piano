@@ -84,7 +84,7 @@
     <div class='container-fluid'>
         <div class='row'>
             <div class='col-sm-12 col-xs-12 text-center'>
-                <p style='color: blue; font-size: 7vh'>Piano style</p>
+                <p style='color: cyan; font-size: 7vh'>My Little Piano</p>
             </div>
         </div>
         <div class='row'>
@@ -225,7 +225,7 @@
 
         $('#c11').on('mousedown touchstart', function(e){
           e.preventDefault();
-          $.ajax('as_note');
+          $.ajax('/as_note');
           $('#c11').css('background', '#585757');
         });
 
@@ -257,54 +257,24 @@
             $(this).css('background', 'black');
         });
 
-        $('#c1').mouseover(function(){
-          $(this).css('background', '#E7E0DF');
-        });
-        $('#c3').mouseover(function(){
-          $(this).css('background', '#E7E0DF');
-        });
-        $('#c5').mouseover(function(){
-          $(this).css('background', '#E7E0DF');
-        });
-        $('#c6').mouseover(function(){
-          $(this).css('background', '#E7E0DF');
-        });
-        $('#c8').mouseover(function(){
-          $(this).css('background', '#E7E0DF');
-        });
-        $('#c10').mouseover(function(){
-          $(this).css('background', '#E7E0DF');
-        });
-        $('#c12').mouseover(function(){
+        $('#c1, #c3, #c5, #c6, #c8, #c10, #c12').mouseover(function(){
           $(this).css('background', '#E7E0DF');
         });
 
-        $('#c2').mouseover(function(){
-          $(this).css('background', '#464646');
-        });
-        $('#c4').mouseover(function(){
-          $(this).css('background', '#464646');
-        });
-        $('#c7').mouseover(function(){
-          $(this).css('background', '#464646');
-        });
-        $('#c9').mouseover(function(){
-          $(this).css('background', '#464646');
-        });
-        $('#c11').mouseover(function(){
+        $('#c2, #c4, #c7, #c9, #c11').mouseover(function(){
           $(this).css('background', '#464646');
         });
 
         var action = true;
         $('body').on('keydown', function(e){
-          if (action == true){
+          if (action === true){
             action = false;
-            var key = e.which;
-            switch(key)
+              let key = e.which;
+              switch(key)
             {
                     case 90:
                         $.ajax('/c_note');
-                        $('#c1').css('background', '#D8D5D4');
+                        $('#c1').css('background', '#d8d5d4');
                         break;
                     case 83:
                         $.ajax('/cs_note');

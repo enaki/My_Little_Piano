@@ -14,23 +14,21 @@
 # -------------------------------------------
 
 from flask import request, Flask, render_template, redirect, url_for, jsonify
-import pigpio
-
-
-# create an instance of the pigpio library
-pi = pigpio.pi()
-
-# define the pin used by the Buzzer
-# this is GPIO12, which is pin 32
-buzzer = 12
+from raspberrypi_configurations import raspberrypi_configurations as rasp
 
 # create an instance of flask
+from raspberrypi_configurations.raspberrypi_configurations import start_rgb_led_by_note
+
 app = Flask(__name__, template_folder='../templates')
+
+pi = rasp.pi
+buzzer = rasp.buzzer
 
 #defining the first octave to start with
 octave = 1
-
 octave_array = None
+
+
 
 # define the route for the main page
 @app.route('/')
@@ -43,118 +41,151 @@ def index():
 @app.route('/c_note')
 def c_note():
     # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][0], 500000)
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][0], 500000)
+        start_rgb_led_by_note('c')
 
-    # send a message to the user
-    return 'ok'
+        # send a message to the user
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/cs_note')
 def cs_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][1], 500000)
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][1], 500000)
+        start_rgb_led_by_note('cs')
 
-    # send a message to the user
-    return 'ok'
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/d_note')
 def d_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][2], 500000)
-
-    # send a message to the user
-    return 'ok'
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][2], 500000)
+        start_rgb_led_by_note('d')
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/ds_note')
 def ds_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][3], 500000)
-
-    # send a message to the user
-    return 'ok'
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][3], 500000)
+        start_rgb_led_by_note('ds')
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/e_note')
 def e_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][4], 500000)
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][4], 500000)
+        start_rgb_led_by_note('e')
 
-    # send a message to the user
-    return 'ok'
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/f_note')
 def f_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][5], 500000)
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][5], 500000)
+        start_rgb_led_by_note('f')
 
-    # send a message to the user
-    return 'ok'
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/fs_note')
 def fs_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][6], 500000)
-
-    # send a message to the user
-    return 'ok'
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][6], 500000)
+        start_rgb_led_by_note('fs')
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/g_note')
 def g_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][7], 500000)
-
-    # send a message to the user
-    return 'ok'
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][7], 500000)
+        start_rgb_led_by_note('g')
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/gs_note')
 def gs_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][8], 500000)
-
-    # send a message to the user
-    return 'ok'
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][8], 500000)
+        start_rgb_led_by_note('gs')
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/a_note')
 def a_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][9], 500000)
-
-    # send a message to the user
-    return 'ok'
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][9], 500000)
+        start_rgb_led_by_note('a')
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/as_note')
 def as_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][10], 500000)
-
-    # send a message to the user
-    return 'ok'
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][10], 500000)
+        start_rgb_led_by_note('as')
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/b_note')
 def b_note():
-    # play the note on the buzzer
-    pi.hardware_PWM(buzzer, octave_array[octave - 1][11], 500000)
-    print(octave)
-    # send a message to the user
-    return 'ok'
+    if rasp.is_buzzer_off:
+        rasp.is_buzzer_off = False
+        pi.hardware_PWM(buzzer, octave_array[octave - 1][11], 500000)
+        start_rgb_led_by_note('b')
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/off')
 def off():
-    # turn off the buzzer
-    pi.hardware_PWM(buzzer, 0, 0)
-
-    # send a message to the user
-    return 'ok'
+    if not rasp.is_buzzer_off and not rasp.is_buzzer_used_locally:
+        # turn off the buzzer
+        pi.hardware_PWM(buzzer, 0, 0)
+        rasp.rgb_turn_off()
+        rasp.is_buzzer_off = True
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/set_octave', methods=['POST'])
