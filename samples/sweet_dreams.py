@@ -17,8 +17,8 @@ class SweetDreams(Song):
         self.sweet_dreams_sequence_2()
         self.sweet_dreams_sequence_4()
 
-    def sweet_dreams_sequence_1(self):
-        o2 = self.octave_2
+    def sweet_dreams_sequence_1(self, octave_1=None):
+        o2 = octave_1 if octave_1 else self.octave_2
         delay = self.delay / 8
 
         # play every note indicated for delay1 (or delay2, or delay3)
@@ -35,9 +35,9 @@ class SweetDreams(Song):
         self.sequence_awaits = array.array('f', [delay/4 for _ in range(len(self.sequence_notes_frequencies))])
         self.play_sequence()
 
-    def sweet_dreams_sequence_2(self):
-        o1 = self.octave_1
-        o2 = self.octave_2
+    def sweet_dreams_sequence_2(self, octave_1=None, octave_2=None):
+        o1 = octave_1 if octave_1 else self.octave_1
+        o2 = octave_2 if octave_2 else self.octave_2
         delay = self.delay / 8
 
         print("Sweet Dreams: second sequence")
@@ -49,9 +49,9 @@ class SweetDreams(Song):
 
         self.play_sequence()
 
-    def sweet_dreams_sequence_3(self):
-        o1 = self.octave_1
-        o2 = self.octave_2
+    def sweet_dreams_sequence_3(self, octave_1=None, octave_2=None):
+        o1 = octave_1 if octave_1 else self.octave_1
+        o2 = octave_2 if octave_2 else self.octave_2
         delay = self.delay / 8
 
         print("Sweet Dreams: third sequence")
@@ -64,9 +64,9 @@ class SweetDreams(Song):
 
         self.play_sequence()
 
-    def sweet_dreams_sequence_4(self):
-        o1 = self.octave_1
-        o2 = self.octave_2
+    def sweet_dreams_sequence_4(self, octave_1=None, octave_2=None):
+        o1 = octave_1 if octave_1 else self.octave_1
+        o2 = octave_2 if octave_2 else self.octave_2
         delay = self.delay / 8
 
         print("Sweet Dreams: forth sequence")

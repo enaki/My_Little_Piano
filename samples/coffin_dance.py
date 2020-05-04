@@ -19,8 +19,8 @@ class CoffinDance(Song):
         self.coffin_dance_sequence_2(play_last_note=False)
         self.coffin_dance_sequence_3()
 
-    def coffin_dance_sequence_header(self):
-        o1 = self.octave_1
+    def coffin_dance_sequence_header(self, octave_1=None):
+        o1 = octave_1 if octave_1 else self.octave_1
         delay = self.delay/8
 
         print("Coffin Dance: header sequence")
@@ -32,9 +32,9 @@ class CoffinDance(Song):
         self.sequence_awaits = array.array('f', [delay/2, delay/2, delay/2, delay/2, delay])
         self.play_sequence()
 
-    def coffin_dance_sequence_1(self):
-        o1 = self.octave_1
-        o2 = self.octave_2
+    def coffin_dance_sequence_1(self, octave_1=None, octave_2=None):
+        o1 = octave_1 if octave_1 else self.octave_1
+        o2 = octave_2 if octave_2 else self.octave_2
         delay = self.delay/8
 
         print("Coffin Dance: first sequence")
@@ -48,9 +48,9 @@ class CoffinDance(Song):
 
         self.play_sequence()
 
-    def coffin_dance_sequence_2(self, play_last_note=True):
-        o1 = self.octave_1
-        o2 = self.octave_2
+    def coffin_dance_sequence_2(self, octave_1=None, octave_2=None, play_last_note=True):
+        o1 = octave_1 if octave_1 else self.octave_1
+        o2 = octave_2 if octave_2 else self.octave_2
         delay = self.delay/8
 
         if play_last_note:
@@ -71,9 +71,9 @@ class CoffinDance(Song):
             self.sequence_awaits = array.array('f', [delay / 2, delay / 2, delay / 2, delay / 2, delay / 2, delay / 2])
         self.play_sequence()
 
-    def coffin_dance_sequence_3(self):
-        o1 = self.octave_1
-        o2 = self.octave_2
+    def coffin_dance_sequence_3(self, octave_1=None, octave_2=None):
+        o1 = octave_1 if octave_1 else self.octave_1
+        o2 = octave_2 if octave_2 else self.octave_2
         delay = self.delay/8
 
         print("Coffin Dance: third sequence")

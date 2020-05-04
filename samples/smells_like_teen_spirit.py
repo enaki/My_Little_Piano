@@ -22,10 +22,10 @@ class SmellsLikeTennSpirit(Song):
         self.smells_lite_teen_spirit_sequence_6()
         self.smells_lite_teen_spirit_sequence_6(last_delay=6)
 
-    def smells_lite_teen_spirit_sequence_1(self):
-        o1 = self.octave_1
-        o2 = self.octave_2
-        o3 = self.octave_3
+    def smells_lite_teen_spirit_sequence_1(self, octave_1=None, octave_2=None, octave_3=None):
+        o1 = octave_1 if octave_1 else self.octave_1
+        o2 = octave_2 if octave_2 else self.octave_2
+        o3 = octave_3 if octave_3 else self.octave_3
         delay = self.delay/8
 
         print("Smells Like Teen Spirits: first sequence")
@@ -39,9 +39,9 @@ class SmellsLikeTennSpirit(Song):
 
         self.play_sequence()
 
-    def smells_lite_teen_spirit_sequence_2(self):
-        o2 = self.octave_2
-        o3 = self.octave_3
+    def smells_lite_teen_spirit_sequence_2(self, octave_1=None, octave_2=None):
+        o2 = octave_1 if octave_1 else self.octave_2
+        o3 = octave_2 if octave_2 else self.octave_3
         delay = self.delay / 8
 
         time.sleep(delay * 2)
@@ -56,9 +56,9 @@ class SmellsLikeTennSpirit(Song):
 
         self.play_sequence()
 
-    def smells_lite_teen_spirit_sequence_3(self):
-        o2 = self.octave_2
-        o3 = self.octave_3
+    def smells_lite_teen_spirit_sequence_3(self, octave_1=None, octave_2=None):
+        o2 = octave_1 if octave_1 else self.octave_2
+        o3 = octave_2 if octave_2 else self.octave_3
         delay = self.delay / 8
         print("Smells Like Teen Spirits: third sequence")
         print("play: C C G_maj G_maj C A_maj G_maj G")
@@ -71,9 +71,9 @@ class SmellsLikeTennSpirit(Song):
 
         self.play_sequence()
 
-    def smells_lite_teen_spirit_sequence_4(self):
-        o2 = self.octave_2
-        o3 = self.octave_3
+    def smells_lite_teen_spirit_sequence_4(self, octave_1=None, octave_2=None):
+        o2 = octave_1 if octave_1 else self.octave_2
+        o3 = octave_2 if octave_2 else self.octave_3
         delay = self.delay / 8
 
         print("Smells Like Teen Spirits: forth sequence")
@@ -85,9 +85,9 @@ class SmellsLikeTennSpirit(Song):
         self.sequence_awaits[4] *= 3/4
         self.play_sequence()
 
-    def smells_lite_teen_spirit_sequence_5(self):
-        o2 = self.octave_2
-        o3 = self.octave_3
+    def smells_lite_teen_spirit_sequence_5(self, octave_1=None, octave_2=None):
+        o2 = octave_1 if octave_1 else self.octave_2
+        o3 = octave_2 if octave_2 else self.octave_3
         delay = self.delay / 8
 
         print("Smells Like Teen Spirits: fifth sequence")
@@ -100,8 +100,8 @@ class SmellsLikeTennSpirit(Song):
 
         self.play_sequence()
 
-    def smells_lite_teen_spirit_sequence_6(self, last_delay=2):
-        o3 = self.octave_3
+    def smells_lite_teen_spirit_sequence_6(self, octave_1=None, last_delay=2):
+        o3 = octave_1 if octave_1 else self.octave_3
         delay = self.delay / 8
 
         print("Smells Like Teen Spirits: sixth sequence")
