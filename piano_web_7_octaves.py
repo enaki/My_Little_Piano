@@ -14,6 +14,7 @@ import threading
 
 import numpy as np
 
+from samples.coffin_dance import CoffinDance
 from samples.sweet_dreams import SweetDreams
 from samples.smells_like_teen_spirit import SmellsLikeTennSpirit
 from web_services import web_services as web
@@ -42,6 +43,7 @@ def local_input_piano_samples():
     data = get_piano_octaves_json()
     sweet_dreams = SweetDreams(data['octave_4'], data['octave_5'], 3)
     smells_like_teen_spirits = SmellsLikeTennSpirit(data['octave_4'], data['octave_5'], data['octave_6'], 1.2)
+    coffin_dance = CoffinDance(data['octave_4'], data['octave_5'], 1.2)
     print("ready")
     while True:
         # if the first button was pressed, play the first song
@@ -57,6 +59,14 @@ def local_input_piano_samples():
             rasp.is_buzzer_off = False
             rasp.is_buzzer_used_locally = True
             smells_like_teen_spirits.play()
+            rasp.is_buzzer_off = True
+            rasp.is_buzzer_used_locally = False
+
+        # if the second button was pressed, play the second song
+        if rasp.GPIO.input(rasp.button3) == rasp.GPIO.LOW and rasp.is_buzzer_off:
+            rasp.is_buzzer_off = False
+            rasp.is_buzzer_used_locally = True
+            coffin_dance.play()
             rasp.is_buzzer_off = True
             rasp.is_buzzer_used_locally = False
 

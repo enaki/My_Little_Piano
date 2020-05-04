@@ -77,8 +77,10 @@ def start_rgb_led_by_note(musical_note):
 # these are pin numbers
 button1 = 18
 button2 = 24
+button3 = 26
 
 # set the pins for the buttons as INPUT, and we will
 # set the initial value to On, or we can say that will be pulled up
 GPIO.setup(button1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button3, GPIO.IN, pull_up_down=GPIO.PUD_UP)

@@ -23,14 +23,15 @@ class SmellsLikeTennSpirit(Song):
         self.smells_lite_teen_spirit_sequence_6(last_delay=6)
 
     def smells_lite_teen_spirit_sequence_1(self):
-        o1 = self.octave_2
-        o2 = self.octave_3
+        o1 = self.octave_1
+        o2 = self.octave_2
+        o3 = self.octave_3
         delay = self.delay/8
 
         print("Smells Like Teen Spirits: first sequence")
-        print("play: F F F F A_maj A_maj A_maj A_maj G_maj G_maj G_maj G_maj C_maj C_maj C_maj C")
+        print("play: F F C F A_maj A_maj A_maj A_maj G_maj G_maj G_maj G_maj C_maj C_maj C_maj C")
 
-        self.sequence_notes_frequencies = array.array('i', [o1['f'], o1['f'], o1['f'], o1['f'], o1['as'],  o1['as'], o1['as'], o1['as'],
+        self.sequence_notes_frequencies = array.array('i', [o1['f'], o1['f'], o3['c'], o3['f'], o1['as'],  o1['as'], o1['as'], o1['as'],
                                         o1['gs'], o1['gs'], o1['gs'], o1['gs'], o2['cs'], o2['cs'], o2['cs'], o2['c']])
         self.sequence_notes = ['f', 'f', 'f', 'f', 'as', 'as', 'as', 'as', 'gs', 'gs', 'gs', 'gs', 'cs', 'cs', 'cs', 'c']
         self.sequence_delays = array.array('f', [delay for _ in range(len(self.sequence_notes_frequencies))])
@@ -81,7 +82,7 @@ class SmellsLikeTennSpirit(Song):
         self.sequence_notes = ['c', 'ds', 'f', 'gs', 'gs', 'f', 'ds', 'cs', 'c']
         self.sequence_delays = array.array('f', [delay, delay*2, delay*2, delay*4, delay, delay*2, delay*3/4, delay*3/4, delay*4])
         self.sequence_awaits = array.array('f', [delay for _ in range(len(self.sequence_notes_frequencies))])
-
+        self.sequence_awaits[4] *= 3/4
         self.play_sequence()
 
     def smells_lite_teen_spirit_sequence_5(self):
@@ -95,6 +96,7 @@ class SmellsLikeTennSpirit(Song):
         self.sequence_notes = ['cs', 'c', 'as', 'gs', 'gs', 'c', 'as', 'gs', 'g']
         self.sequence_delays = array.array('f', [delay, delay*7/2, delay, delay * 7/2, delay, delay * 2, delay*3/4, delay*3/4, delay * 4])
         self.sequence_awaits = array.array('f', [delay for _ in range(len(self.sequence_notes_frequencies))])
+        self.sequence_awaits[4] *= 3 / 4
 
         self.play_sequence()
 
