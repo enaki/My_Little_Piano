@@ -1,7 +1,10 @@
 #----------------------------------BUZZER INITIALIZER-------------------------------
+
+
 import pigpio
 
 # create an instance of the pigpio library
+
 pi = pigpio.pi()
 
 # define the pin used by the Buzzer. This is GPIO12, which is pin 32
@@ -12,6 +15,7 @@ is_buzzer_used_locally = False
 
 
 #----------------------------------RGB LED INITIALIZER-------------------------------
+import time
 import RPi.GPIO as GPIO  # we import the RPi.GPIO library with the name of GPIO
 
 redled = 8

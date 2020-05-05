@@ -9,7 +9,6 @@
 
  """
 import threading
-import numpy as np
 
 from samples.coffin_dance import CoffinDance
 from samples.sweet_dreams import SweetDreams
@@ -78,7 +77,7 @@ def main():
 
         web.app.debug = False
         web.app.use_reloader = False
-        web.app.run(host='0.0.0.0', port=5000)
+        web.app.run(host='0.0.0.0', port=2014)
 
     except KeyboardInterrupt:
         pass

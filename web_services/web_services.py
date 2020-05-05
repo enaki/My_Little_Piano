@@ -15,9 +15,6 @@
 
 from flask import request, Flask, render_template, redirect, url_for, jsonify
 from raspberrypi_configurations import raspberrypi_configurations as rasp
-from raspberrypi_configurations import raspberrypi_configurations as rasp
-
-# create an instance of flask
 from raspberrypi_configurations.raspberrypi_configurations import start_rgb_led_by_note
 
 web_song = 0    #0 - none of the samples is requested
@@ -42,6 +39,17 @@ def index():
     # at the '/' route we will return the single_octave_old.html
     # template that is in the templates folder
     return render_template('index.html')
+
+
+@app.route('/play_sample', methods=['POST'])
+def play_sample():
+    global web_song
+    if rasp.is_buzzer_off:
+        web_song = int(request.form['sample'])
+        # send a message to the user
+        return 'ok'
+    else:
+        return 'not ok'
 
 
 @app.route('/full_piano')

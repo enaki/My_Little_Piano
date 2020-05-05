@@ -6,68 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css'/>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/piano.css') }}">
   <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
   <style>
     body, html{
       height: 100%;
-    }
-
-    .whiteKey
-    {
-        position: relative;
-        border-style: solid;
-        border-color: #000000;
-        border-width: 0.42vh 0.21vh 0.42vh 0.21vh;
-        border-radius: 0.84vh 0.84vh 0.84vh 0.84vh;
-        text-align: center;
-        width: 6.32vh;
-        height: 31.61vh;
-        background: #FFFFFF;
-    }
-
-    .blackKey
-    {
-        position: relative;
-        border-style: solid;
-        border-color: #000000;
-        border-width: 0.42vh 0.21vh 0.42vh 0.21vh;
-        border-radius: 0 0 0.84vh 0.84vh;
-        text-align: center;
-        top: 0;
-        background: #000000;
-        z-index: 1;
-        width: 4.21vh;
-        height: 21.07vh;
-        margin: 0 0 0 -2.1vh;
-    }
-
-    .whiteKeyText
-    {
-        margin-top: 27.5vh;
-        color: black;
-        font-size: 2.3vh;
-    }
-
-    .blackKeyText
-    {
-        margin-top: 17.91vh;
-        color: white;
-        font-size: 1.8vh;
-    }
-
-    .c1
-    {
-        border-left-width: 0.42vh;
-    }
-
-    .c12
-    {
-        border-right-width: 0.42vh;
-    }
-
-    .blackKey + .whiteKey
-    {
-        margin-left: -2.1vh;
     }
 
     div
@@ -76,13 +19,6 @@
         moz-user-select: none; /* Firefox 2+ */
         ms-user-select: none; /* IE 10+ */
         user-select: none; /* Standard syntax */
-    }
-
-    button
-    {
-      font-size: 2vh !important;
-      background: orange;
-      background-color: solid;
     }
 
     body {
@@ -105,15 +41,15 @@
         padding-right: 0;
     }
 
-.carousel{
-  margin-top: 50px;
-}
-.carousel-inner{
-  height: 100px;
-}
-.carousel-caption{
-  top: 50%;
-}
+    a{
+        color: orange;
+    }
+
+    a:hover{
+        color: white;
+        background-color: blueviolet;
+    }
+
   </style>
 </head>
 <body>
@@ -183,6 +119,7 @@
 
     function change_octave(octave){
       $.ajax({
+          async: false,
           url: '/set_octave',
           type: 'POST',
           data: {'octave': octave},
@@ -214,7 +151,7 @@
         let html = [];
         for (let i=set_octave; i < set_octave+3; i++){
             html.push(
-            '                    <div class=\'col-sm-4 col-xs-12 d-flex justify-content-center octave_resizer\'>\n' +
+            '                    <div class=\'col-md-4 col-sm-12 col-xs-12 d-flex justify-content-center octave_resizer\'>\n' +
             '                    <div class=\'octave_' + i + ' c1 whiteKey\'><p class= \'octave_' + i + ' k1 whiteKeyText\'></p></div>\n' +
             '                    <div class=\'octave_' + i + ' c2 blackKey\'><p class= \'octave_' + i + ' k2 blackKeyText\'></p></div>\n' +
             '                    <div class=\'octave_' + i + ' c3 whiteKey\'><p class= \'octave_' + i + ' k3 whiteKeyText\'></p></div>\n' +
@@ -332,8 +269,6 @@
         let item_class = "." +  note.replace(/\s/g, '.');
         $(item_class).css('background', '#464646');
     });
-
-
 
 </script>
 </html>
