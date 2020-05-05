@@ -75,9 +75,9 @@ def start_rgb_led_by_note(musical_note):
 #----------------------------------BUTTONS INITIALIZER-------------------------------
 # define the pins used by the buttons
 # these are pin numbers
-button1 = 18
+button3 = 18
 button2 = 24
-button3 = 26
+button1 = 26
 
 # set the pins for the buttons as INPUT, and we will
 # set the initial value to On, or we can say that will be pulled up

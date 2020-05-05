@@ -15,19 +15,25 @@
 
 from flask import request, Flask, render_template, redirect, url_for, jsonify
 from raspberrypi_configurations import raspberrypi_configurations as rasp
+from raspberrypi_configurations import raspberrypi_configurations as rasp
 
 # create an instance of flask
 from raspberrypi_configurations.raspberrypi_configurations import start_rgb_led_by_note
 
-app = Flask(__name__, template_folder='../templates')
+web_song = 0    #0 - none of the samples is requested
+                #1 - sample 1
+                #2 - sample 2
+                #3 - sample 3
+
+
+app = Flask(__name__)
 
 pi = rasp.pi
 buzzer = rasp.buzzer
 
-#defining the first octave to start with
+# defining the first octave to start with
 octave = 1
 octave_array = None
-
 
 
 # define the route for the main page
@@ -37,17 +43,21 @@ def index():
     # template that is in the templates folder
     return render_template('index.html')
 
+
 @app.route('/full_piano')
 def full_piano():
-    return render_template('full_piano.html')
+    return render_template('three_octave_piano.html')
+
 
 @app.route('/single_octave')
 def single_octave():
     return render_template('single_octave.html')
 
+
 @app.route('/samples')
 def samples():
     return render_template('samples.html')
+
 
 @app.route('/c_note')
 def c_note():
