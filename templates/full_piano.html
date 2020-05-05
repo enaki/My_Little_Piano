@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My Little Piano</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css'/>
+  <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+  <style>
+    body, html{
+      height: 100%;
+    }
+
+    .whiteKey
+    {
+        position: relative;
+        border-style: solid;
+        border-color: #000000;
+        border-width: 0.42vh 0.21vh 0.42vh 0.21vh;
+        border-radius: 0.84vh 0.84vh 0.84vh 0.84vh;
+        text-align: center;
+        width: 6.32vh;
+        height: 31.61vh;
+        background: #FFFFFF;
+    }
+
+    .blackKey
+    {
+        position: relative;
+        border-style: solid;
+        border-color: #000000;
+        border-width: 0.42vh 0.21vh 0.42vh 0.21vh;
+        border-radius: 0 0 0.84vh 0.84vh;
+        text-align: center;
+        top: 0;
+        background: #000000;
+        z-index: 1;
+        width: 4.21vh;
+        height: 21.07vh;
+        margin: 0 0 0 -2.1vh;
+    }
+
+    .whiteKeyText
+    {
+        margin-top: 27.5vh;
+        color: black;
+        font-size: 2.3vh;
+    }
+
+    .blackKeyText
+    {
+        margin-top: 17.91vh;
+        color: white;
+        font-size: 1.8vh;
+    }
+
+    .c1
+    {
+        border-left-width: 0.42vh;
+    }
+
+    .c12
+    {
+        border-right-width: 0.42vh;
+    }
+
+    .blackKey + .whiteKey
+    {
+        margin-left: -2.1vh;
+    }
+
+    div
+    {
+        webkit-user-select: none; /* Safari 3.1+ */
+        moz-user-select: none; /* Firefox 2+ */
+        ms-user-select: none; /* IE 10+ */
+        user-select: none; /* Standard syntax */
+    }
+
+    button
+    {
+      font-size: 2vh !important;
+      background: orange;
+      background-color: solid;
+    }
+
+    body {
+      background: gray;
+    }
+
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+    footer {
+      background-color: #111111;
+    }
+
+    .octave_resizer{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark">
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/single_octave">Single Octave Piano</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/full_piano">All Octaves Piano</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  href="/samples">Samples</a>
+    </li>
+  </ul>
+
+</nav>
+
+
+<div class="container text-center">
+
+  <div class='container-fluid'>
+        <div class='row'>
+            <div class='col-sm-12 col-xs-12 text-center'>
+                <p style='color: cyan; font-size: 7vh'>My Little Piano</p>
+            </div>
+        </div>
+
+        <div id="piano" class="row container horizontal-scrollable">
+
+        </div>
+
+    </div>
+</div><br>
+
+<footer class="page-footer font-small fixed-bottom text-white-50">
+  <div class="footer-copyright text-center py-3" style="color: white">© 2020 Copyright: Enachi Vasile SM Proiect</div>
+</footer>
+
+</body>
+<script>
+    function change_octave(octave){
+      $.ajax({
+          url: '/set_octave',
+          type: 'POST',
+          data: {'octave': octave},
+      });
+    }
+
+    function keys_text()
+    {
+        for (let i = 1; i <= 7; i++)
+        {
+            $('.octave_' + i + '.k1').html('C' + i);
+            $('.octave_' + i + '.k2').html('CS' +i);
+            $('.octave_' + i + '.k3').html('D' + i);
+            $('.octave_' + i + '.k4').html('DS' +i);
+            $('.octave_' + i + '.k5').html('E' + i);
+            $('.octave_' + i + '.k6').html('F' + i);
+            $('.octave_' + i + '.k7').html('FS' +i);
+            $('.octave_' + i + '.k8').html('G' + i);
+            $('.octave_' + i + '.k9').html('GS' +i);
+            $('.octave_' + i + '.k10').html('A' +i);
+            $('.octave_' + i + '.k11').html('AS' + i);
+            $('.octave_' + i + '.k12').html('B' +i);
+        }
+    }
+
+
+    $(document).ready(function(){
+        var html = [];
+
+        for (let i=1; i <= 7; i++){
+            html.push(
+            '                    <div class=\'col-sm-4 col-xs-12 d-flex justify-content-center octave_resizer\'>\n' +
+            '                    <div class=\'octave_' + i + ' c1 whiteKey\'><p class= \'octave_' + i + ' k1 whiteKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c2 blackKey\'><p class= \'octave_' + i + ' k2 blackKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c3 whiteKey\'><p class= \'octave_' + i + ' k3 whiteKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c4 blackKey\'><p class= \'octave_' + i + ' k4 blackKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c5 whiteKey\'><p class= \'octave_' + i + ' k5 whiteKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c6 whiteKey\'><p class= \'octave_' + i + ' k6 whiteKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c7 blackKey\'><p class= \'octave_' + i + ' k7 blackKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c8 whiteKey\'><p class= \'octave_' + i + ' k8 whiteKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c9 blackKey\'><p class= \'octave_' + i + ' k9 blackKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c10 whiteKey\'><p class=\'octave_' + i + ' k10 whiteKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c11 blackKey\'><p class=\'octave_' + i + ' k11 blackKeyText\'></p></div>\n' +
+            '                    <div class=\'octave_' + i + ' c12 whiteKey\'><p class=\'octave_' + i + ' k12 whiteKeyText\'></p></div>\n' +
+            '                    </div>');
+        }
+        $("#piano").append( html.join('') );
+        keys_text();
+    });
+
+    $(document).on('mousedown touchstart', '.c1', function(e){
+      e.preventDefault();
+      $.ajax('/c_note');
+      $('.c1').css('background', '#D8D5D4');
+    });
+
+     $(document).on('mousedown touchstart', '.c2', function(e){
+      e.preventDefault();
+      $.ajax('/cs_note');
+      $('.c2').css('background', '#585757');
+    });
+
+      $(document).on('mousedown touchstart', '.c3', function(e){
+      e.preventDefault();
+      $.ajax('/d_note');
+      $('.c3').css('background', '#D8D5D4');
+    });
+
+     $(document).on('mousedown touchstart', '.c4', function(e){
+      e.preventDefault();
+      $.ajax('/ds_note');
+      $('.c4').css('background', '#585757');
+    });
+
+     $(document).on('mousedown touchstart', '.c5', function(e){
+      e.preventDefault();
+      $.ajax('/e_note');
+      $('.c5').css('background', '#D8D5D4');
+    });
+
+     $(document).on('mousedown touchstart', '.c6', function(e){
+      e.preventDefault();
+      $.ajax('/f_note');
+      $('.c6').css('background', '#D8D5D4');
+    });
+
+     $(document).on('mousedown touchstart', '.c7', function(e){
+      e.preventDefault();
+      $.ajax('/fs_note');
+      $('.c7').css('background', '#585757');
+    });
+
+     $(document).on('mousedown touchstart', '.c8', function(e){
+      e.preventDefault();
+      $.ajax('/g_note');
+      $('.c8').css('background', '#D8D5D4');
+    });
+
+     $(document).on('mousedown touchstart', '.c9', function(e){
+      e.preventDefault();
+      $.ajax('/gs_note');
+      $('.c9').css('background', '#585757');
+    });
+
+     $(document).on('mousedown touchstart', '.c10', function(e){
+      e.preventDefault();
+      $.ajax('/a_note');
+      $('.c10').css('background', '#D8D5D4');
+    });
+
+     $(document).on('mousedown touchstart', '.c11', function(e){
+      e.preventDefault();
+      $.ajax('/as_note');
+      $('.c11').css('background', '#585757');
+    });
+
+     $(document).on('mousedown touchstart', '.c12', function(e){
+      e.preventDefault();
+      $.ajax('/b_note');
+      $('.c12').css('background', '#D8D5D4');
+    });
+
+    $(document).on('mouseout', '.c1,.c3,.c5,.c6,.c8,.c10,.c12', function(){
+        $(this).css('background', 'white');
+        $.ajax('/off');
+    });
+
+    $(document).on('mouseout', '.c1,.c3,.c5,.c6,.c8,.c10,.c12', function(){
+        $(this).css('background', 'white');
+        $.ajax('/off');
+    });
+
+    $(document).on('mouseout', '.c2,.c4,.c7,.c9,.c11', function(){
+        $(this).css('background', 'black');
+        $.ajax('/off');
+    });
+
+    $(document).on('mouseup touchend', '.c1,.c3,.c5,.c6,.c8,.c10,.c12', function(e){
+        e.preventDefault();
+        $.ajax('/off');
+        $(this).css('background', 'white');
+    });
+
+    $(document).on('mouseup touchend', '.c2,.c4,.c7,.c9,.c11', function(){
+        e.preventDefault();
+        $.ajax('/off');
+        $(this).css('background', 'black');
+    });
+
+    $(document).on('mouseover', '.c1, .c3, .c5, .c6, .c8, .c10, .c12', function(){
+        $(this).css('background', '#E7E0DF');
+    });
+
+    $(document).on('mouseover', '.c2, .c4, .c7, .c9, .c11', function(){
+        $(this).css('background', '#464646');
+    });
+
+
+
+</script>
+</html>

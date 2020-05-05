@@ -33,10 +33,21 @@ octave_array = None
 # define the route for the main page
 @app.route('/')
 def index():
-    # at the '/' route we will return the index.html
+    # at the '/' route we will return the single_octave_old.html
     # template that is in the templates folder
     return render_template('index.html')
 
+@app.route('/full_piano')
+def full_piano():
+    return render_template('full_piano.html')
+
+@app.route('/single_octave')
+def single_octave():
+    return render_template('single_octave.html')
+
+@app.route('/samples')
+def samples():
+    return render_template('samples.html')
 
 @app.route('/c_note')
 def c_note():
