@@ -1,84 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>My Little Piano</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Little Piano</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css'/>
-  <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-  <style>
-    body, html{
-      height: 100%;
-    }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+          integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+            integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+            crossorigin="anonymous"></script>
+    <style>
+        body, html {
+            height: 100%;
+        }
 
-    div
-    {
-        webkit-user-select: none; /* Safari 3.1+ */
-        moz-user-select: none; /* Firefox 2+ */
-        ms-user-select: none; /* IE 10+ */
-        user-select: none; /* Standard syntax */
-    }
+        div {
+            webkit-user-select: none; /* Safari 3.1+ */
+            moz-user-select: none; /* Firefox 2+ */
+            ms-user-select: none; /* IE 10+ */
+            user-select: none; /* Standard syntax */
+        }
 
-    body {
-        background: rgb(184,96,105);
-        background: radial-gradient(circle, rgba(184,96,105,1) 11%, rgba(121,25,34,1) 35%, rgba(18,3,28,1) 80%);
-    }
+        body {
+            background: rgb(184, 96, 105);
+            background: radial-gradient(circle, rgba(184, 96, 105, 1) 11%, rgba(121, 25, 34, 1) 35%, rgba(18, 3, 28, 1) 80%);
+        }
 
-    .navbar {
-        margin-bottom: 0;
-        border-radius: 0;
-        background-color: #111111;
-    }
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+            background-color: #111111;
+        }
 
-    footer {
-      background-color: #111111;
-    }
+        footer {
+            background-color: #111111;
+        }
 
-    a{
-        color: orange;
-    }
+        a {
+            color: orange;
+        }
 
-    a:hover{
-        color: white;
-        background-color: blueviolet;
-    }
+        a:hover {
+            color: white;
+            background-color: blueviolet;
+        }
 
-  </style>
+    </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-dark">
-  <!-- Links -->
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="/">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/single_octave">Single Octave Piano</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/full_piano">Three Octaves Piano</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link"  href="/samples">Samples</a>
-    </li>
-  </ul>
+<nav class="bg-dark">
+    <!-- Links -->
+    <ul class="nav nav-tabs nav-fill">
+        <li class="nav-item">
+            <a class="nav-link p-2" href="/"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-2" href="/single_octave"><i class="fad fa-piano"></i><i class="fas fa-heart"></i> Single Octave Piano</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-2" href="/full_piano"><i class="fas fa-heartbeat"></i> Three Octaves Piano</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link p-2" href="/samples"><i class="fas fa-music"></i> Samples</a>
+        </li>
+    </ul>
 </nav>
 
 <div class="container text-center">
-  <div class='container-fluid'>
+    <div class='container-fluid'>
         <div class='row'>
             <div class='col-sm-12 col-xs-12 text-center'>
                 <p style='color: cyan; font-size: 7vh'>My Little Piano</p>
             </div>
         </div>
-  </div>
-          <img src="static/home.jpg" class="img-fluid" alt="Responsive image">
+    </div>
+    <img src="static/home.jpg" class="img-fluid" alt="Responsive image">
 </div>
 
 <footer class="page-footer font-small fixed-bottom text-white-50">
-  <div class="footer-copyright text-center py-3" style="color: white">© 2020 Copyright: Enachi Vasile SM Proiect</div>
+    <div class="footer-copyright text-center py-3" style="color: white">© 2020 Copyright: Enachi Vasile SM Proiect</div>
 </footer>
 
 </body>
